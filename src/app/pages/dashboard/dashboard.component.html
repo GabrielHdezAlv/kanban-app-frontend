@@ -1,0 +1,48 @@
+<div class="dashboard-container">
+  <!-- Zona Principal del Dashboard -->
+  <div class="task-main-column" *ngIf="selectedGroup">  
+    <!-- Contenedor de Columnas -->
+    <div class="task-columns">
+      <!-- Iteramos sobre las columnas del grupo -->
+      <div class="task-column" *ngFor="let column of selectedGroup.columns">
+        <!-- Header de la columna con el nombre -->
+        <div class="column-header">
+          <small>{{ column.columnName }}</small>
+        </div>
+
+        <!-- Contenedor de tareas -->
+        <div class="task-list">
+          <!-- Iteramos sobre las tareas de esta columna -->
+          <div *ngFor="let task of tasksByColumn[column.status]" class="task-card">
+            {{ task.name }}
+          </div>
+
+          <!-- Nueva tarea (solo se muestra cuando está en modo edición) -->
+          <div *ngIf="addingTaskColumn === column.status" class="task-card new-task">
+            <input type="text" [(ngModel)]="newTaskName" placeholder="Introduce un título..." #taskInput />
+            <div class="new-task-actions">
+              <button mat-button color="primary" (click)="addTask(column.status)">Añadir Tarjeta</button>
+              <button mat-icon-button (click)="cancelAddingTask()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <!-- Botón para añadir tarea -->
+          <button *ngIf="addingTaskColumn !== column.status"
+            mat-stroked-button class="add-task-btn" 
+            (click)="startAddingTask(column.status)">
+            + Añadir Tarea
+          </button>
+        </div>
+      </div>
+
+      <!-- ✅ Columna para "Añadir Columna" al final -->
+      <div class="task-column add-column">
+        <div class="add-column-header">
+          + Añadir Columna
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

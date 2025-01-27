@@ -1,0 +1,39 @@
+<div class="task-groups-container">
+  <div class="task-groups-title">
+    <h2>Sus grupos</h2>
+    <button class="add-group-btn" (click)="addNewGroup()">+</button>
+  </div>
+
+  <!-- Lista de Grupos -->
+  <mat-card *ngFor="let group of taskGroups" 
+    class="group-card"
+    [ngClass]="{ 'selected': group.groupId === selectedGroup?.groupId }"
+    (click)="selectGroup(group)"
+    (mouseenter)="hoveredGroup = group.groupId"
+    (mouseleave)="hoveredGroup = null">
+
+    <!-- Contenedor del contenido -->
+    <div class="group-content">
+      <div class="group-color">.</div>
+      <span class="group-name">{{ group.name }}</span>
+    </div>
+
+    <!-- Botón de opciones (tres puntos) -->
+    <button mat-icon-button class="group-options-btn"
+            *ngIf="hoveredGroup === group.groupId"
+            (click)="toggleMenu($event, group)">
+      <mat-icon>more_horiz</mat-icon>
+    </button>
+
+    <!-- Menú de opciones (Eliminar y Editar) -->
+    <div class="group-options-menu" *ngIf="openMenuGroup === group.groupId">
+      <button mat-icon-button color="warn" class="menu-btn" (click)="deleteGroup(group)">
+        Eliminar grupo
+      </button>
+      <button mat-icon-button color="primary" class="menu-btn" (click)="editGroup(group)">
+        Editar grupo
+      </button>
+    </div>
+
+  </mat-card>
+</div>

@@ -1,0 +1,56 @@
+.container {
+    width: 100%;
+    background-color: #f4f4f4;
+    overflow: hidden;
+  }
+
+  .second-mat-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    background-color: #182531;
+    color: rgb(184, 184, 184);
+  }
+  
+  .main-mat-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #182531;
+      color: rgb(184, 184, 184);
+      width: 15%;
+      height: 100%;
+      border-bottom: 1px solid #0c1319;
+    }
+
+    .other {
+      width: 88.5%;
+      height: 100%;
+      align-items: center;
+      padding: 0px;
+      display: flex;
+      padding-left: 20px;
+      color: white
+    }
+  }
+  
+  .spacer {
+    flex: 1; // Empuja los botones a la derecha
+  }
+  
+  footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #182531;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  

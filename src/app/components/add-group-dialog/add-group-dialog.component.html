@@ -1,0 +1,36 @@
+<h2>Nuevo Grupo</h2>
+<form [formGroup]="groupForm" class="group-form">
+  <!-- Campo del nombre del grupo -->
+  <mat-form-field>
+    <mat-label>Nombre del Grupo</mat-label>
+    <input matInput formControlName="name" placeholder="Nombre del grupo" />
+    <mat-error *ngIf="groupForm.get('name')?.invalid">
+      El nombre del grupo es obligatorio y no debe superar 50 caracteres.
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Lista de columnas -->
+  <div formArrayName="columns">
+    <div *ngFor="let column of columns.controls; let i = index" [formGroupName]="i" class="column-group">
+      <mat-form-field>
+        <mat-label>Nombre de Columna</mat-label>
+        <input matInput formControlName="columnName" placeholder="Nombre de columna" />
+        <mat-error *ngIf="column.get('columnName')?.invalid">
+          El nombre de la columna es obligatorio y no debe superar 50 caracteres.
+        </mat-error>
+      </mat-form-field>
+      <button mat-icon-button color="warn" (click)="removeColumn(i)" *ngIf="columns.length > 1">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <button mat-stroked-button color="primary" (click)="addColumn()" [disabled]="columns.length >= 10">
+    + Añadir Columna
+  </button>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="save()">Guardar</button>
+    <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

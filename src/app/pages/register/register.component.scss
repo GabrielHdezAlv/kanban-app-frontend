@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: #f4f4f4;
+}
+
+mat-card {
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  background-color: white;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.link {
+  color: #1976d2; /* Azul Material Design */
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
