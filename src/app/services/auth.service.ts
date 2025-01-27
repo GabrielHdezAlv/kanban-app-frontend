@@ -4,14 +4,15 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomSnackbarComponent } from '../components/custom-snackbar/custom-snackbar.component';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5285/api/auth'; // URL base de la API
+  private apiUrl = `${environment.apiUrl}/api/auth`; // ✅ URL base desde configuración
 
-  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
 
   /**
    * Registro de usuario
