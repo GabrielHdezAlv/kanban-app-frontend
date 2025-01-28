@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomSnackbarComponent } from '../components/custom-snackbar/custom-snackbar.component';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,8 @@ export class AuthService {
    * Inicio de sesión
    */
   login(email: string, password: string): Observable<any> {
+    console.log("environment.apiUrl: ", environment.apiUrl);
+
     return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
