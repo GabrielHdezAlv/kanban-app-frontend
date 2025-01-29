@@ -1,6 +1,11 @@
 <div class="dashboard-container">
+  <!-- Panel de Grupos -->
+  <div class="task-groups-column">
+    <app-task-groups (groupSelected)="onGroupSelected($event)"></app-task-groups>
+  </div>
+
   <!-- Zona Principal del Dashboard -->
-  <div class="task-main-column" *ngIf="selectedGroup">  
+  <div class="task-main-column" *ngIf="selectedGroup">
     <!-- Contenedor de Columnas -->
     <div class="task-columns">
       <!-- Iteramos sobre las columnas del grupo -->
@@ -17,21 +22,8 @@
             {{ task.name }}
           </div>
 
-          <!-- Nueva tarea (solo se muestra cuando está en modo edición) -->
-          <div *ngIf="addingTaskColumn === column.status" class="task-card new-task">
-            <input type="text" [(ngModel)]="newTaskName" placeholder="Introduce un título..." #taskInput />
-            <div class="new-task-actions">
-              <button mat-button color="primary" (click)="addTask(column.status)">Añadir Tarjeta</button>
-              <button mat-icon-button (click)="cancelAddingTask()">
-                <mat-icon>close</mat-icon>
-              </button>
-            </div>
-          </div>
-
           <!-- Botón para añadir tarea -->
-          <button *ngIf="addingTaskColumn !== column.status"
-            mat-stroked-button class="add-task-btn" 
-            (click)="startAddingTask(column.status)">
+          <button mat-stroked-button class="add-task-btn">
             + Añadir Tarea
           </button>
         </div>
