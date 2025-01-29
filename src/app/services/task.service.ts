@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environmentProd } from '../../environments/environment.prod';
 import { environment } from '../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = `${environment.apiUrl}/api`;
+  private apiUrl = `${environmentProd.apiUrl}/api`;
 
   private apiUrlGroups = `${this.apiUrl}/tasks/api/groups`;
   private apiUrlTasks = `${this.apiUrl}/tasks/api/groups/tasks`;
