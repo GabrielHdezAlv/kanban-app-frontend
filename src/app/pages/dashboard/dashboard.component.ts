@@ -113,6 +113,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  addNewTask(event: any) {
+    console.log("event: ", event);
+  }
 }
 
 interface TaskColumn {
