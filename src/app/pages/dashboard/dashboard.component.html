@@ -22,10 +22,20 @@
             {{ task.name }}
           </div>
 
+          <input *ngIf="btnTaskActive" #taskInput class="task-card-input" type="text">
+
           <!-- Botón para añadir tarea -->
-          <button mat-stroked-button class="add-task-btn" (click)="addNewTask($event)">
-            + Añadir Tarea
+          <button *ngIf="!btnTaskActive" mat-stroked-button class="add-task-btn" (click)="addNewTask()">
+            <span>+ Añadir Tarea</span>
           </button>
+
+          <!-- Botón para añadir tarea -->
+          <div *ngIf="btnTaskActive" class="add-task-btn-container">
+            <button mat-stroked-button class="add-task-btn-active" (click)="newTask(column)">
+              <span>Añadir tarjeta</span>
+            </button>
+            <button class="cancel-new-task" (click)="cancelNewTask()">X</button>
+          </div>
         </div>
       </div>
 

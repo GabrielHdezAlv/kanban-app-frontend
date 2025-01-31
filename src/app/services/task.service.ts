@@ -41,7 +41,7 @@ export class TaskService {
   }
 
   addNewTask(userId: string, groupId: string, newTask: any) {
-    return this.http.post(`${this.apiUrlNewTask}?userId=${userId}?groupId=${groupId}`, newTask);
+    return this.http.post(`${this.apiUrlNewTask}?userId=${userId}&groupId=${groupId}`, newTask);
   }
 }
 
@@ -66,5 +66,6 @@ interface Task {
   name: string,
   description: string,
   state: number,
-  creator: string
+  creator: string,
+  order: number
 }

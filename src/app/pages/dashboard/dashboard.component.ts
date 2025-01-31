@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { TaskGroupsComponent } from '../../components/task-groups/task-groups.component';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskService } from '../../services/task.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,10 +40,12 @@ import { TaskService } from '../../services/task.service';
     ])
   ]
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Output() groupSelected = new EventEmitter<string>();
+  @ViewChild('taskInput') taskInput!: ElementRef;
 
   isExpanded = false;
+  btnTaskActive = false;
   selectedGroup: TaskGroup | null = null;
   tasksByColumn: { [key: number]: any[] } = {};
 
@@ -70,6 +73,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     window.removeEventListener('toggleGroups', this.toggleListener);
+  }
+
+  ngAfterViewChecked() {
+    if (this.btnTaskActive && this.taskInput) {
+      this.taskInput.nativeElement.focus();
+    }
   }
 
   logout() {
@@ -105,6 +114,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.tasksByColumn = tasks.reduce((acc, task) => {
           acc[task.state] = acc[task.state] || [];
           acc[task.state].push(task);
+
+          // Ordenar cada grupo de tareas por 'order'
+          acc[task.state].sort((a, b) => a.order - b.order);
+
           return acc;
         }, {} as { [key: number]: any[] });
       },
@@ -114,8 +127,40 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  addNewTask(event: any) {
-    console.log("event: ", event);
+  addNewTask() {
+    this.btnTaskActive = true;
+  }
+
+  cancelNewTask() {
+    this.btnTaskActive = false;
+  }
+
+  newTask(column: any) {
+    var groupId = this.selectedGroup ? this.selectedGroup.groupId : "";
+    const taskTitle = this.taskInput.nativeElement.value;
+
+    const lastTask = this.tasksByColumn[column.status]?.length
+      ? this.tasksByColumn[column.status][this.tasksByColumn[column.status].length - 1]
+      : null;
+
+    var task = {
+      name: taskTitle,
+      description: 'task',
+      state: column.status,
+      creator: "Gabriel",
+      createdAt: new Date().toISOString(), // Genera la fecha en formato ISO 8601
+      order: lastTask ? lastTask.order + 1 : 1 // Si hay tareas, suma 1 al último orden, sino inicia en 1
+    };
+
+    this.taskService.addNewTask(this.userId, groupId, task).subscribe(
+      r => {
+        this.fetchTasks(groupId);
+        this.btnTaskActive = false;
+      },
+      error => {
+        console.error('❌ Error al obtener tareas:', error);
+      }
+    );
   }
 }
 
