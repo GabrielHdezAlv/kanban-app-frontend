@@ -52,6 +52,8 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewChecked {
   private toggleListener!: (event: Event) => void;
   private userId = localStorage.getItem('userId') || '';
 
+  editingTask: string | null = null;
+
   state = 'hidden';
 
   constructor(

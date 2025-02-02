@@ -48,7 +48,55 @@
   padding: 10px;
   border-radius: 5px;
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-card.editing {
+  background-color: rgba(0, 0, 0, 0.7); /* Oscurece la tarjeta */
+  color: white;
+}
+
+.task-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-input {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  outline: none;
+}
+
+.edit-task {
+  display: none;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+
+  mat-icon {
+    font-size: 18px;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    padding: 0px;
+    bottom: 5px;
+    right: 5px;
+  }
+}
+
+.task-card:hover {
+  border: 1px solid white;
+
+  .edit-task {
+    display: inline-block;
+  }
 }
 
 .task-card-input {
@@ -102,7 +150,6 @@
 
 .add-column-header {
   min-height: 50px !important;
-  /* 👈 Ajustamos la altura del header de "+ Añadir Columna" */
   width: 100%;
   text-align: left;
   padding-left: 0px;
@@ -116,6 +163,8 @@
 .task-list {
   width: 100%;
   min-height: auto;
+  max-height: 500px;
+  overflow-y: auto;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -131,6 +180,7 @@
   padding-right: 90px;
   padding-left: 0px;
   text-align: left;
+  margin-top: 10px;
 }
 
 .add-task-btn:hover {

@@ -20,22 +20,26 @@
           <!-- Iteramos sobre las tareas de esta columna -->
           <div *ngFor="let task of tasksByColumn[column.status]" class="task-card">
             {{ task.name }}
+            <!-- <button class="edit-task" (click)="cancelNewTask()">edit</button> -->
+            <button mat-icon-button class="edit-task">
+              <mat-icon style="size: 5px">edit</mat-icon>
+            </button>
           </div>
 
           <input *ngIf="btnTaskActive" #taskInput class="task-card-input" type="text">
+        </div>
 
-          <!-- Botón para añadir tarea -->
-          <button *ngIf="!btnTaskActive" mat-stroked-button class="add-task-btn" (click)="addNewTask()">
-            <span>+ Añadir Tarea</span>
+        <!-- Botón para añadir tarea -->
+        <button *ngIf="!btnTaskActive" mat-stroked-button class="add-task-btn" (click)="addNewTask()">
+          <span>+ Añadir Tarea</span>
+        </button>
+
+        <!-- Botón para añadir tarea -->
+        <div *ngIf="btnTaskActive" class="add-task-btn-container">
+          <button mat-stroked-button class="add-task-btn-active" (click)="newTask(column)">
+            <span>Añadir tarjeta</span>
           </button>
-
-          <!-- Botón para añadir tarea -->
-          <div *ngIf="btnTaskActive" class="add-task-btn-container">
-            <button mat-stroked-button class="add-task-btn-active" (click)="newTask(column)">
-              <span>Añadir tarjeta</span>
-            </button>
-            <button class="cancel-new-task" (click)="cancelNewTask()">X</button>
-          </div>
+          <button class="cancel-new-task" (click)="cancelNewTask()">X</button>
         </div>
       </div>
 
