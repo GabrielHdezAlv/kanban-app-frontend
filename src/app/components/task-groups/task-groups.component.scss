@@ -39,98 +39,98 @@
         background-color: #3850666e; /* 👈 Ligero cambio de color */
       }
     }
-}
 
-.group-card.selected {
-  background-color: #4e708f6e;
-  color: rgb(190, 190, 190);
-  font-size: 12px;
-  width: 100%;
-  height: 35px;
-}
-  
-.group-card {
-  width: 100%;
-  padding: 10px;
-  font-size: 12px;
-  background-color: #182531;
-  height: 35px; 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-}
+    .group-card {
+      width: 100%;
+      padding: 10px;
+      font-size: 12px;
+      background-color: #182531;
+      height: 35px; 
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
 
-.group-name {
-  white-space: nowrap; // ✅ Evita saltos de línea
-  overflow: hidden; // ✅ Oculta el texto que excede el contenedor
-  text-overflow: ellipsis; // ✅ Muestra "..."
-  flex-grow: 1; // ✅ Asegura que el texto se ajuste al espacio restante
-  min-width: 0; // ✅ Soluciona problemas con flexbox y ellipsis
-  display: block; // ✅ Asegura que funcione correctamente con ellipsis
-  max-width: 150px; // ✅ Ajusta según sea necesario
-}
+      .group-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-grow: 1; // ✅ Hace que ocupe el espacio disponible sin afectar los botones
+        min-width: 0;
 
-.group-color {
-  width: 25px;
-  height: 20px;
-  background-color: rgb(56, 120, 203);
-  margin-right: 10px;
-  border-radius: 8%;
-  color: transparent;
-}
-  
-.group-card:hover {
-  background-color: #3850666e;;
-}
+        .group-color {
+          width: 25px;
+          height: 20px;
+          background-color: rgb(56, 120, 203);
+          margin-right: 10px;
+          border-radius: 8%;
+          color: transparent;
+        }
 
-.group-card:hover .group-options-btn {
-  display: block;
-}
+        .group-name {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          flex-grow: 1;
+          min-width: 0;
+          display: block;
+          max-width: 150px;
+        }
+      }
 
-.group-options-btn {
-  display: none;
-  position: relative;
-  flex-shrink: 0;
-  margin-right: 10px;
-  z-index: 90;
-}
+      .group-options-btn {
+        display: none;
+        position: relative;
+        flex-shrink: 0;
+        margin-right: 10px;
+        z-index: 90;
+      }
 
-.group-options-menu {
-  position: absolute;
-  top: 160%;
-  left: 80%;
-  transform: translateY(-40%);
-  background-color: #182531;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 120px;
-  height: 60px;
-  z-index: 99;
-}
+      .group-options-menu {
+        position: absolute;
+        top: 160%;
+        left: 80%;
+        transform: translateY(-40%);
+        background-color: #182531;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 120px;
+        height: 60px;
+        z-index: 99;
 
-.group-content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-grow: 1; // ✅ Hace que ocupe el espacio disponible sin afectar los botones
-  min-width: 0;
-}
+        .menu-btn {
+          width: 100%;
+          height: 30px;
+          border-radius: 0%;
+          font-size: 12px;
+          text-align: left;
+          padding: 10px;
+          color: rgb(190, 190, 190);
+        }
+        
+        .menu-btn:hover {
+          background-color: #3850666e;;
+        }
+      }
+    }
 
-.menu-btn {
-  width: 100%;
-  height: 30px;
-  border-radius: 0%;
-  font-size: 12px;
-  text-align: left;
-  padding: 10px;
-  color: rgb(190, 190, 190);
-}
+    .group-card:hover {
+      background-color: #3850666e;;
+    }
 
-.menu-btn:hover {
-  background-color: #3850666e;;
+    .group-card:hover .group-options-btn {
+      display: block;
+    }
+
+    .group-card.selected {
+      background-color: #4e708f6e;
+      color: rgb(190, 190, 190);
+      font-size: 12px;
+      width: 100%;
+      height: 35px;
+    }
 }

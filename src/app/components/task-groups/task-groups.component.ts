@@ -26,8 +26,8 @@ export class TaskGroupsComponent implements OnInit {
   taskGroups: TaskGroup[] = [];
   selectedGroup: TaskGroup | null = null;
 
-  hoveredGroup: string | null = null; // ✅ Para mostrar el botón al hacer hover
-  openMenuGroup: string | null = null; // ✅ Para abrir el menú
+  hoveredGroup: string | null = null; // Para mostrar el botón al hacer hover
+  openMenuGroup: string | null = null; // Para abrir el menú
 
   userId: any;
 
@@ -39,18 +39,16 @@ export class TaskGroupsComponent implements OnInit {
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
-
     this.getGroups();
   }
 
   getGroups(){
-     // Obtener userId desde localStorage
     if (this.userId) {
       this.taskService.getUserGroups(this.userId).subscribe(groups => {
         this.taskGroups = groups;
 
         if (this.taskGroups.length > 0) {
-          this.selectGroup(this.taskGroups[0]); // Seleccionar el primer grupo automáticamente
+          this.selectGroup(this.taskGroups[0]);
         }
       });
     }
@@ -106,5 +104,5 @@ interface TaskColumn {
 interface TaskGroup {
   groupId: string;
   name: string;
-  columns: TaskColumn[]; // Ahora incluimos las columnas dentro de cada grupo
+  columns: TaskColumn[];
 }

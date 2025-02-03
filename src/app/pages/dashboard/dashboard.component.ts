@@ -8,7 +8,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { TaskGroupsComponent } from '../../components/task-groups/task-groups.component';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskService } from '../../services/task.service';
-import { lastValueFrom } from 'rxjs';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +20,8 @@ import { lastValueFrom } from 'rxjs';
     CommonModule,
     TaskGroupsComponent,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   animations: [
     trigger('fadeAnimation', [
@@ -44,16 +45,14 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Output() groupSelected = new EventEmitter<string>();
   @ViewChild('taskInput') taskInput!: ElementRef;
 
+  private toggleListener!: (event: Event) => void;
+  private userId = localStorage.getItem('userId') || '';
+
   isExpanded = false;
   btnTaskActive = false;
   selectedGroup: TaskGroup | null = null;
   tasksByColumn: { [key: number]: any[] } = {};
-
-  private toggleListener!: (event: Event) => void;
-  private userId = localStorage.getItem('userId') || '';
-
   editingTask: string | null = null;
-
   state = 'hidden';
 
   constructor(
@@ -164,6 +163,16 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewChecked {
       }
     );
   }
+
+  deleteTask(task: any) {
+    console.log("Eliminar tarea:", task);
+    // Lógica para eliminar la tarea
+  }
+  
+  editTask(task: any) {
+    console.log("Editar tarea:", task);
+    // Lógica para editar la tarea
+  }
 }
 
 interface TaskColumn {
@@ -175,12 +184,4 @@ interface TaskGroup {
   groupId: string;
   name: string;
   columns: TaskColumn[];
-}
-
-interface NewTask {
-  name: string,
-  description: string,
-  state: number,
-  creator: "Gabriel",
-  createdAt: Date
 }

@@ -17,13 +17,24 @@
 
         <!-- Contenedor de tareas -->
         <div class="task-list">
-          <!-- Iteramos sobre las tareas de esta columna -->
           <div *ngFor="let task of tasksByColumn[column.status]" class="task-card">
             {{ task.name }}
-            <!-- <button class="edit-task" (click)="cancelNewTask()">edit</button> -->
-            <button mat-icon-button class="edit-task">
-              <mat-icon style="size: 5px">edit</mat-icon>
+
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
             </button>
+            
+            <!-- Menú con la clase personalizada -->
+            <mat-menu #menu="matMenu" [overlapTrigger]="false" panelClass="custom-mat-menu">
+              <button mat-menu-item (click)="deleteTask(task)">
+                <mat-icon>delete</mat-icon>
+                <span>Eliminar tarjeta</span>
+              </button>
+              <button mat-menu-item (click)="editTask(task)">
+                <mat-icon color="primary">edit</mat-icon>
+                <span>Editar tarjeta</span>
+              </button>            
+            </mat-menu>
           </div>
 
           <input *ngIf="btnTaskActive" #taskInput class="task-card-input" type="text">
